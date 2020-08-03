@@ -1,5 +1,6 @@
 package com.kurilenko.xslsparser.service.fieldcell;
 
+import com.kurilenko.xslsparser.InstallationParserType;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
@@ -14,7 +15,7 @@ public enum LightFixtureSheetCell implements SheetCell {
   MODEL_MARK("Модель\\ марка", 5, "^.{1,128}$", false),
   PROCEDURE_SUPPLIER("Производитель", 6, "^.{1,128}$", false),
   PARENT_IDENTIFIER("Идентификатор родителя", 7, "^.{1,128}$", false),
-  PARENT_TYPE("Тип родителя", 8, "^.{1,128}$", false),
+  PARENT_TYPE("Тип родителя", 8, String.join("|", InstallationParserType.getAllName()), false),
   UTILITY_POLE_IDENTIFIER("Идентификатор опоры", 9, "^.{1,128}$", false),
   WORKING_TEMPERATURE_RANGE("Диапазон рабочей температуры", 10, "^.{1,128}$", false),
   POWER_CONSUMPTION("Потребляемая мощность", 11, "^.{1,128}$", true),

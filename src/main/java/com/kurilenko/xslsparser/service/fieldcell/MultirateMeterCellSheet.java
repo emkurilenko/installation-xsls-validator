@@ -1,5 +1,6 @@
 package com.kurilenko.xslsparser.service.fieldcell;
 
+import com.kurilenko.xslsparser.InstallationParserType;
 import java.util.List;
 import lombok.AllArgsConstructor;
 
@@ -13,7 +14,7 @@ public enum MultirateMeterCellSheet implements SheetCell {
   MODEL_MARK("Модель\\ марка", 4, "^.{1,128}$", false),
   PROCEDURE_SUPPLIER("Производитель \\ Поставщик", 5, "^.{1,128}$", false),
   PARENT_IDENTIFIER("Идентификатор предка", 6, "^.{1,128}$", false),
-  PARENT_TYPE("Тип предка", 7, "^.{1,128}$", false),
+  PARENT_TYPE("Тип предка", 7, String.join("|", InstallationParserType.getAllName()), false),
   WORKING_TEMPERATURE_RANGE("Диапазон рабочей температуры", 8, "^.{1,128}$", false),
   WORKING_VOLTAGE_RANGE("Межповерочный интервал", 9, "^.{1,128}$", false),
   START_DATE("Дата начала эксплуатации", 10, "^(([1-9])|(1[0-2]|0[1-9]))/(3[01]|[12][0-9]|0[1-9])/[0-9]{2}$", true),
@@ -30,9 +31,11 @@ public enum MultirateMeterCellSheet implements SheetCell {
   TARIFF_FOUR("Тариф4", 21, "^.{1,128}$", false),
   CHECKING_DATE("Дата поверки", 22, "^(([1-9])|(1[0-2]|0[1-9]))/(3[01]|[12][0-9]|0[1-9])/[0-9]{2}$", false),
   BYPASS_DATE("Дата объезда", 23, "^(([1-9])|(1[0-2]|0[1-9]))/(3[01]|[12][0-9]|0[1-9])/[0-9]{2}$", false),
-  MAINTENANCE_DATE("Дата технического обслуживания", 24, "^(([1-9])|(1[0-2]|0[1-9]))/(3[01]|[12][0-9]|0[1-9])/[0-9]{2}$", false),
+  MAINTENANCE_DATE("Дата технического обслуживания", 24,
+      "^(([1-9])|(1[0-2]|0[1-9]))/(3[01]|[12][0-9]|0[1-9])/[0-9]{2}$", false),
   REPAIR_DATE("Дата ремонта", 25, "^(([1-9])|(1[0-2]|0[1-9]))/(3[01]|[12][0-9]|0[1-9])/[0-9]{2}$", false),
-  GUARANTEE_EXPIRATION_DATE("Дата окончания гарантии", 26, "^(([1-9])|(1[0-2]|0[1-9]))/(3[01]|[12][0-9]|0[1-9])/[0-9]{2}$",
+  GUARANTEE_EXPIRATION_DATE("Дата окончания гарантии", 26,
+      "^(([1-9])|(1[0-2]|0[1-9]))/(3[01]|[12][0-9]|0[1-9])/[0-9]{2}$",
       false);
 
   private final String name;
