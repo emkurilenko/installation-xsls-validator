@@ -1,5 +1,7 @@
 package com.kurilenko.xslsparser.service.parser;
 
+import static com.kurilenko.xslsparser.config.dispatcher.InstallationXSLSFileValidatorType.HEADER_NAME_VALIDATOR;
+
 import com.kurilenko.xslsparser.InstallationParserType;
 import com.kurilenko.xslsparser.config.dispatcher.InstallationXSLSFileValidatorType;
 import com.kurilenko.xslsparser.service.fieldcell.SheetCell;
@@ -16,7 +18,6 @@ public class DefaultInstallationHeaderNameValidator extends AbstractInstallation
 
   private final List<SheetCell> cells;
   private final InstallationParserType installationType;
-  private final InstallationXSLSFileValidatorType validatorType;
 
   @Override
   public void validate(Sheet sheet) {
@@ -41,6 +42,6 @@ public class DefaultInstallationHeaderNameValidator extends AbstractInstallation
 
   @Override
   public InstallationXSLSFileValidatorType validatorType() {
-    return validatorType;
+    return HEADER_NAME_VALIDATOR;
   }
 }

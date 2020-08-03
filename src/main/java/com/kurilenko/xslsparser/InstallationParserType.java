@@ -16,7 +16,6 @@ public enum InstallationParserType {
   SENSOR("Датчик", "Датчик");
 
   private final String name;
-
   private final String type;
 
   public static InstallationParserType findByName(String value) {

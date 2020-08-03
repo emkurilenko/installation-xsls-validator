@@ -1,5 +1,6 @@
 package com.kurilenko.xslsparser.service.parser;
 
+import static com.kurilenko.xslsparser.config.dispatcher.InstallationXSLSFileValidatorType.VALUE_CELL_VALIDATOR;
 import static java.util.Optional.ofNullable;
 import static org.apache.poi.ss.usermodel.CellType.BLANK;
 
@@ -21,7 +22,6 @@ public class DefaultInstallationValueValidator extends AbstractInstallationXSLSV
 
   private final List<SheetCell> cells;
   private final InstallationParserType installationType;
-  private final InstallationXSLSFileValidatorType validatorType;
 
   @Override
   public void validate(Sheet sheet) {
@@ -68,6 +68,6 @@ public class DefaultInstallationValueValidator extends AbstractInstallationXSLSV
 
   @Override
   public InstallationXSLSFileValidatorType validatorType() {
-    return validatorType;
+    return VALUE_CELL_VALIDATOR;
   }
 }
