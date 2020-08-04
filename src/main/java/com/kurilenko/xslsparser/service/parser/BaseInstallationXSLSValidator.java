@@ -6,7 +6,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 public interface BaseInstallationXSLSValidator {
 
-  void validate(Sheet sheet);
+  Boolean validate(Sheet sheet);
 
   InstallationParserType installationType();
 

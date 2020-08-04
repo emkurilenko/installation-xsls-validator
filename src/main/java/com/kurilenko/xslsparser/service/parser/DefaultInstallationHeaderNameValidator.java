@@ -20,7 +20,7 @@ public class DefaultInstallationHeaderNameValidator extends AbstractInstallation
   private final InstallationParserType installationType;
 
   @Override
-  public void validate(Sheet sheet) {
+  public Boolean validate(Sheet sheet) {
 
     int nameRowIndex = 1;
     Row row = sheet.getRow(nameRowIndex);
@@ -33,6 +33,7 @@ public class DefaultInstallationHeaderNameValidator extends AbstractInstallation
       }
     });
 
+    return true;
   }
 
   @Override

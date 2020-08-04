@@ -10,8 +10,8 @@ public class DefaultInstallationParentValidator extends AbstractInstallationXSLS
     BaseInstallationXSLSValidator {
 
   @Override
-  public void validate(Sheet sheet) {
-
+  public Boolean validate(Sheet sheet) {
+    return true;
   }
 
   @Override

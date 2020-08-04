@@ -24,40 +24,45 @@ public class DefaultInstallationValueValidator extends AbstractInstallationXSLSV
   private final InstallationParserType installationType;
 
   @Override
-  public void validate(Sheet sheet) {
+  public Boolean validate(Sheet sheet) {
 
+    Boolean isValid = Boolean.TRUE;
     int currentRowIndex = 2;
     int rowsAmount = sheet.getPhysicalNumberOfRows();
 
     while (currentRowIndex < rowsAmount) {
       Row currentRow = sheet.getRow(currentRowIndex);
       if (Objects.nonNull(currentRow)) {
-        cells.forEach(item -> {
-          Cell cell = ofNullable(currentRow.getCell(item.getIndex()))
-              .orElseGet(() -> currentRow.createCell(item.getIndex(), BLANK));
-          String value = dataFormatter.formatCellValue(cell);
+        isValid = cells.stream()
+                       .map(item -> {
+                         Cell cell = ofNullable(currentRow.getCell(item.getIndex()))
+                             .orElseGet(() -> currentRow.createCell(item.getIndex(), BLANK));
+                         String value = dataFormatter.formatCellValue(cell);
 
-          if (item.isRequired()) {
-            if (value.isEmpty() || !value.matches(item.regExp())) {
-              setForegroundColor(cell, IndexedColors.RED1);
-            }
-          }
-          if (!value.isEmpty() && !value.matches(item.regExp())) {
+                         if (item.isRequired()) {
+                           if (value.isEmpty() || !value.matches(item.regExp())) {
+                             setForegroundColor(cell, IndexedColors.RED1);
+                             return Boolean.FALSE;
+                           }
+                         }
+                         if (!value.isEmpty() && !value.matches(item.regExp())) {
+                           setForegroundColor(cell, IndexedColors.RED1);
+                           return Boolean.FALSE;
+                         }
 
-            if(item.getName().equals("Дата начала эксплуатации")){
-              System.out.println("qwerty");
-            }
-
-            setForegroundColor(cell, IndexedColors.RED1);
-          }
-        });
+                         return Boolean.TRUE;
+                       })
+                       .allMatch(res -> res.equals(Boolean.TRUE));
       }
       else {
         Row newRow = sheet.createRow(currentRowIndex);
         setForegroundColor(newRow, IndexedColors.RED1);
+        isValid = Boolean.FALSE;
       }
       currentRowIndex++;
     }
+
+    return isValid;
 
   }
 
